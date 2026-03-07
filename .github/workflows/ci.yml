@@ -1,0 +1,31 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Setup environment
+        run: make setup
+
+      - name: Lint code
+        run: make lint
+
+      - name: Check code formatting
+        run: make format-check
+
+      - name: Run unit tests
+        run: make test
