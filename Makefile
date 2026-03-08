@@ -21,6 +21,10 @@ format-check:
 test:
 	uv run pytest tests/
 
+# Makefile additions
+load-test:
+	uv run locust -f locustfile.py --headless -u 10 -r 2 --run-time 30s --host http://localhost:8000
+
 # 5. Clean up
 clean:
 	rm -rf .venv
