@@ -31,11 +31,17 @@ jobs:
         run: make test
 
       - name: Start Application (Background)
+        if: github.ref == 'refs/heads/staging'
         run: uv run python src/mlops/main.py &
 
       - name: Wait for server to start
+        if: github.ref == 'refs/heads/staging'
         run: sleep 5
 
       - name: Run Load Test (Only on staging)
         if: github.ref == 'refs/heads/staging'
         run: make load-test
+
+      - name: Stop Background Application
+        if: always() && github.ref == 'refs/heads/staging'
+        run: pkill -f "python src/mlops/main.py" || true
