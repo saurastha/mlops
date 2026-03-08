@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fastapi[standard]>=0.135.1",
     "numpy>=2.4.2",
     "pandas>=3.0.1",
     "scikit-learn>=1.8.0",
@@ -12,6 +13,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "locust>=2.43.3",
     "pytest>=9.0.2",
     "ruff>=0.15.5",
 ]
