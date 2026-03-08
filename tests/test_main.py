@@ -1,5 +1,11 @@
-from mlops.main import add
+from fastapi.testclient import TestClient
+
+from mlops.main import app
+
+client = TestClient(app)
 
 
-def test_add():
-    assert 2 == add(1, 1)
+def test_read_root():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello from ML Ops!"}
